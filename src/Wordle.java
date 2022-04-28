@@ -123,9 +123,6 @@ public class Wordle {
         int dayCount = (int)daysBetween(cal1.getTime(),cal2.getTime());
         dayCount += 7; //offset by week for reading file purposes
 
-
-        File file = new File("/Users/mihir/IdeaProjects/wordle/src/dict.txt");
-
         findLine(dayCount);
 
     }
@@ -142,7 +139,13 @@ public class Wordle {
     }
 
     public static void findLine(int lineNumber) {
-        File file = new File("/Users/mihir/IdeaProjects/wordle/src/dict.txt");
+        File file = new File("src/dict.txt");
+        while (!file.exists()) {
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("dict.txt file not found at src/dict.txt, please provide absolute or relative path");
+            String answer = scanner.nextLine();
+            file = new File(answer);
+        }
         try {
             Scanner scanner = new Scanner(file);
 
